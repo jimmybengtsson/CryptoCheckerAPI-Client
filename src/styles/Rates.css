@@ -1,0 +1,87 @@
+.Rates-container {
+    width: 100%;
+    height: 100%;
+}
+
+.rates-ul {
+    list-style-type: none;
+    position: center;
+    height: 100%;
+}
+
+.rates-li {
+    float: left;
+    margin: 0 4% 4% 4%;
+    box-shadow: 0 0 5px rgba(6, 113, 169, 0.9);
+
+    width: 40%;
+    height: 40%;
+
+    -webkit-transition: box-shadow 0.5s ease;
+    -moz-transition: box-shadow 0.5s ease;
+    -o-transition: box-shadow 0.5s ease;
+    -ms-transition: box-shadow 0.5s ease;
+    transition: box-shadow 0.5s ease;
+}
+
+.rates-li:hover {
+    -webkit-box-shadow: 0px 0px 7px rgba(255,255,255,0.9);
+    box-shadow: 0px 0px 7px rgba(255,255,255,0.9);
+}
+
+.rates-component {
+    width: 100%;
+    height: 100%;
+    background-color: rgba(6, 113, 169, 0.89);
+    color: white;
+}
+
+.rates-component-header {
+
+    width: 100%;
+    height: 30%;
+
+}
+
+.rates-component-body {
+
+    width: 100%;
+    height: 70%;
+
+}
+
+.rates-component-body-chart {
+
+    float: left;
+    width: 70%;
+    height: 100%;
+
+}
+
+.rates-component-body-price {
+
+    float: right;
+    width: 30%;
+    height: 100%;
+
+}
+
+
+.rates-component-fullname {
+    float: left;
+    font-size: 190%;
+    margin: 15px 0 0 15px;
+}
+
+.rates-component-shortname {
+    float: right;
+    font-size: 150%;
+    margin: 20px 15px 0 0;
+}
+
+.rates-component-shortnametest {
+    float: right;
+    font-size: 150%;
+    margin: 20px 15px 0 0;
+    color: rgba(75,192,192,0.4);
+}
