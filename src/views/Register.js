@@ -4,7 +4,7 @@ import axios from "axios/index";
 
 
 
-class SignInComponent extends Component {
+class RegisterComponent extends Component {
 
     constructor(props) {
         super(props);
@@ -33,12 +33,17 @@ class SignInComponent extends Component {
         };
         console.log(JSON.stringify(data));
 
-        axios.post('http://192.168.86.95:8005/register', JSON.stringify(data))
+        axios({
+            method: 'post',
+            url: 'http://188.166.80.171:3000/register',
+            data: JSON.stringify(data),
+            headers: {'Content-Type': 'application/json'}
+        })
             .then((response) => {
 
                 console.log(response);
 
-                });
+            });
 
         event.preventDefault();
     }
@@ -64,4 +69,4 @@ class SignInComponent extends Component {
     }
 }
 
-export default SignInComponent;
+export default RegisterComponent;

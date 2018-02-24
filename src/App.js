@@ -4,7 +4,8 @@ import './styles/App.css';
 import { slide as Menu } from 'react-burger-menu'
 import Rates from "./views/Rates";
 import Wallets from "./views/Wallet";
-import SignIn from './components/SignInComponent'
+import Login from './views/Login';
+import Register from './views/Register';
 
 class App extends Component {
 
@@ -14,6 +15,7 @@ class App extends Component {
         this.state = {
             menuOpen: false,
             signedIn: false,
+            page: 'rates',
         };
         this.isSignedIn = this.isSignedIn.bind(this);
     }
@@ -44,11 +46,17 @@ class App extends Component {
             if (this.state.signedIn === true) {
                 return <Wallets data={this.state}/>;
             } else {
-                return <SignIn />
+                this.setState({
+                    page: 'login',
+                })
             }
 
-        } else {
+        } if (this.state.page === 'rates') {
             return <Rates/>
+        } if (this.state.page === 'login') {
+            return <Login/>
+        } if (this.state.page === 'register') {
+            return <Register/>;
         }
     }
 

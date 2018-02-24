@@ -2,13 +2,14 @@ import React, { Component } from 'react';
 import '../styles/Rates.css';
 import axios from 'axios';
 import RatesComponent from "../components/RatesComponent";
+import { BeatLoader } from 'react-spinners';
 
 class Rates extends Component {
     constructor(props){
         super(props);
 
         this.state = {
-            loaded: false,
+            loading: true,
         };
 
         this.getContent = this.getContent.bind(this);
@@ -16,7 +17,7 @@ class Rates extends Component {
     }
 
     stateLoaded() {
-        if(this.state.loaded === true) {
+        if(this.state.loading === false) {
             return <ul className="rates-ul">
                     <li className="rates-li"><RatesComponent fullName="Bitcoin" name="XBT" serverName="xbt" data={ this.state.crypto.xbt }/></li>
                 <li className="rates-li"><RatesComponent fullName="Ethereum" name="ETH" serverName="eth" data={ this.state.crypto.eth }/></li>
@@ -24,12 +25,17 @@ class Rates extends Component {
                 <li className="rates-li"><RatesComponent fullName="Bitcoin Cash" name="BCH" serverName="bch" data={ this.state.crypto.bch }/></li>
             </ul>
         } else {
-            return <p>Loading</p>
+            return <div className="loading-component">
+                <BeatLoader
+                color={'#0897e2'}
+                loading={this.state.loading}
+                />
+            </div>;
         }
     }
 
     getContent () {
-        axios.get('http://192.168.86.95:8005/rates/latest')
+        axios.get('http://188.166.80.171:3000/rates/latest')
             .then((response) => {
 
                 let res = response.data;
@@ -37,7 +43,7 @@ class Rates extends Component {
                 return this.setState({
 
                     crypto: res,
-                    loaded: true,
+                    loading: false,
                 });
             })
     }
@@ -82,7 +88,6 @@ class Rates extends Component {
         return (
 
             <div className="Rates-container">
-                <p>Rates</p>
                 { this.stateLoaded() }
             </div>
 

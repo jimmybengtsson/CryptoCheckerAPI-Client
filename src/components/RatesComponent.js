@@ -2,6 +2,7 @@ import React, { Component } from 'react';
 import '../styles/Rates.css';
 import axios from "axios/index";
 import {Line} from 'react-chartjs-2';
+import { BeatLoader } from 'react-spinners';
 
 
 
@@ -11,7 +12,7 @@ class RatesComponent extends Component {
         super(props);
 
         this.state = {
-            loaded: false,
+            loading: true,
         };
 
         this.fetchLastHour = this.fetchLastHour.bind(this);
@@ -52,14 +53,19 @@ class RatesComponent extends Component {
 
     loadChart() {
 
-        if(this.state.loaded === true) {
+        if(this.state.loading === false) {
             console.log(this.times);
             console.log(this.price);
 
             return <Line data={this.state.data} />;
 
         } else {
-            return <p>Loading</p>;
+            return <div className="loading-component">
+                <BeatLoader
+                    color={'#0897e2'}
+                    loading={this.state.loading}
+                />
+            </div>;
         }
     }
 
@@ -71,7 +77,7 @@ class RatesComponent extends Component {
         let newD = new Date(d);
         newD = newD.toISOString();
 
-        let urlQueary = 'http://192.168.86.95:8005/rates/search?currency=' + this.props.serverName + '&since=' + newD;
+        let urlQueary = 'http://188.166.80.171:3000/rates/search?currency=' + this.props.serverName + '&since=' + newD;
 
         console.log(urlQueary);
 
@@ -79,7 +85,7 @@ class RatesComponent extends Component {
             .then((response) => {
                 console.log(response.data);
 
-                let res = response.data;
+                let res = response.data.data;
 
                 let data = res.filter((element, index) => {
                     return index % 5 === 0;
@@ -109,7 +115,7 @@ class RatesComponent extends Component {
     componentDidMount() {
         this.fetchLastHour().then(() => {
             return this.setState({
-                loaded: true,
+                loading: false,
                 data: this.data,
             });
         });
